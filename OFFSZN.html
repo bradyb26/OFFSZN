@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OFFSZN Hockey — Summer 2026 Training Camp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,700&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #060608;
+      --dark: #0d0e12;
+      --dark2: #14161c;
+      --ice: #e8f4ff;
+      --blue: #1a6cff;
+      --blue-bright: #4d8fff;
+      --red: #e02020;
+      --white: #f0f4ff;
+      --text-muted: #8890a4;
+      --border: #1e2130;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Diagonal stripe pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.012) 40px,
+        rgba(255,255,255,0.012) 41px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 4rem;
+      background: rgba(6, 6, 8, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--blue) !important;
+      color: var(--white) !important;
+      padding: 0.55rem 1.4rem !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--blue-bright) !important; color: var(--white) !important; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 100% 60% at 50% 100%, rgba(26,108,255,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 20%, rgba(26,108,255,0.06) 0%, transparent 50%);
+    }
+
+    /* Ice rink lines */
+    .hero-rink {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to top, rgba(26,108,255,0.05), transparent);
+      border-top: 1px solid rgba(26,108,255,0.15);
+    }
+
+    .hero-rink::before {
+      content: '';
+      position: absolute;
+      top: 40px; left: 50%;
+      transform: translateX(-50%);
+      width: 120px; height: 120px;
+      border: 1px solid rgba(26,108,255,0.2);
+      border-radius: 50%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 1.5rem;
+      position: relative;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--blue-bright);
+      opacity: 0.5;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 13rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      position: relative;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .hero h1 .blue { color: var(--blue); }
+    .hero h1 .stroke {
+      -webkit-text-stroke: 2px var(--white);
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      padding: 1rem 2.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 2px solid var(--blue);
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+
+    .btn-primary:hover { background: var(--blue-bright); border-color: var(--blue-bright); }
+
+    .btn-secondary {
+      color: var(--text-muted);
+      padding: 1rem 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+      border: 2px solid var(--border);
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+
+    .btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 5rem;
+      position: relative;
+      border: 1px solid var(--border);
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+
+    .hero-stat {
+      padding: 1.5rem 3rem;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .hero-stat:last-child { border-right: none; }
+
+    .hero-stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--blue-bright);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee {
+      background: var(--blue);
+      padding: 0.9rem 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 2rem;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-item {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .marquee-item::after { content: '❄'; font-size: 0.7rem; }
+
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 7rem 4rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) { .about { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem; } }
+
+    .section-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-eyebrow::before { content: ''; width: 30px; height: 2px; background: var(--blue-bright); }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title .blue { color: var(--blue); }
+
+    .section-body {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .about-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
+
+    .feature-check {
+      width: 24px; height: 24px;
+      background: rgba(26,108,255,0.15);
+      border: 1px solid var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--blue-bright);
+      flex-shrink: 0;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-card {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--blue), var(--blue-bright));
+    }
+
+    .about-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      color: var(--blue-bright);
+      margin-bottom: 1.25rem;
+    }
+
+    .phase-block {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: flex-start;
+    }
+
+    .phase-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      line-height: 1;
+      color: rgba(26,108,255,0.2);
+      flex-shrink: 0;
+      width: 50px;
+    }
+
+    .phase-info {}
+
+    .phase-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+
+    .phase-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .break-block {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: rgba(224,32,32,0.08);
+      border: 1px solid rgba(224,32,32,0.2);
+      margin: 1rem 0;
+    }
+
+    .break-icon { font-size: 1.2rem; }
+    .break-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #ff6b6b;
+    }
+
+    /* ── TRAINING ── */
+    .training {
+      background: var(--dark);
+      padding: 7rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .training::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100px; right: -100px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--blue), transparent);
+    }
+
+    .training-inner { max-width: 1300px; margin: 0 auto; }
+
+    .training-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 900px) { .training-grid { grid-template-columns: 1fr; } }
+
+    .training-card {
+      background: var(--dark);
+      padding: 2rem;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .training-card:hover { background: var(--dark2); }
+
+    .training-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--blue), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .training-card:hover::after { transform: scaleX(1); }
+
+    .training-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .training-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--blue-bright);
+      margin-bottom: 0.5rem;
+      opacity: 0.6;
+    }
+
+    .training-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+
+    .training-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── SCHEDULE ── */
+    .schedule {
+      padding: 7rem 4rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) { .schedule { padding: 5rem 1.5rem; } }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) { .schedule-grid { grid-template-columns: 1fr; } }
+
+    .schedule-panel {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+    }
+
+    .schedule-panel.june { border-top: 3px solid var(--blue); }
+    .schedule-panel.july { border-top: 3px solid var(--blue-bright); }
+    .schedule-panel.break-panel { border-top: 3px solid var(--red); grid-column: span 2; }
+
+    @media (max-width: 768px) { .schedule-panel.break-panel { grid-column: span 1; } }
+
+    .schedule-month {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+
+    .schedule-panel.june .schedule-month { color: var(--blue); }
+    .schedule-panel.july .schedule-month { color: var(--blue-bright); }
+    .schedule-panel.break-panel .schedule-month { color: var(--red); }
+
+    .schedule-subtitle {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .date-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .date-chip {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      background: rgba(26,108,255,0.1);
+      border: 1px solid rgba(26,108,255,0.25);
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+
+    .schedule-panel.july .date-chip { background: rgba(77,143,255,0.1); border-color: rgba(77,143,255,0.25); }
+
+    .weekly-box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .weekly-day {
+      background: rgba(26,108,255,0.08);
+      border: 1px solid rgba(26,108,255,0.2);
+      padding: 0.75rem;
+      text-align: center;
+    }
+
+    .weekly-day-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: var(--blue-bright);
+      margin-bottom: 0.3rem;
+    }
+
+    .weekly-day-hours {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ── PRICING ── */
+    .pricing {
+      background: var(--dark);
+      padding: 7rem 4rem;
+      position: relative;
+    }
+
+    .pricing::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100px; right: -100px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--blue), transparent);
+    }
+
+    .pricing-inner { max-width: 1100px; margin: 0 auto; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+    .pricing-card {
+      background: var(--dark);
+      padding: 2.5rem;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .pricing-card:hover { background: var(--dark2); }
+
+    .pricing-card.featured {
+      background: var(--dark2);
+    }
+
+    .pricing-card.featured::before {
+      content: 'BEST VALUE';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      background: var(--blue);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 0.4rem;
+    }
+
+    .pricing-card.featured { padding-top: 3.5rem; }
+
+    .pricing-option {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .pricing-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-card.featured .pricing-amount { color: var(--blue-bright); }
+
+    .pricing-per {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1.5rem 0;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      line-height: 1.4;
+    }
+
+    .pricing-features li:last-child { border-bottom: none; }
+    .pricing-check { color: var(--blue-bright); flex-shrink: 0; margin-top: 0.1rem; }
+
+    .pricing-cta {
+      display: block;
+      width: 100%;
+      padding: 0.9rem;
+      background: transparent;
+      border: 2px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    }
+
+    .pricing-card.featured .pricing-cta {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+
+    .pricing-cta:hover { background: var(--blue); border-color: var(--blue); color: var(--white); }
+
+    .savings-banner {
+      background: rgba(26,108,255,0.08);
+      border: 1px solid rgba(26,108,255,0.2);
+      padding: 1.5rem 2rem;
+      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .savings-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+    .savings-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+
+    .savings-text span { color: var(--blue-bright); }
+
+    /* ── WHAT'S INCLUDED ── */
+    .included {
+      padding: 7rem 4rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) { .included { padding: 5rem 1.5rem; } }
+
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) { .included-grid { grid-template-columns: 1fr; } }
+
+    .included-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+
+    .included-item:hover { border-color: var(--blue); }
+
+    .included-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .included-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .included-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── COACHES ── */
+    .coaches {
+      background: var(--dark);
+      padding: 7rem 4rem;
+      position: relative;
+    }
+
+    .coaches::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100px; right: -100px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--blue), transparent);
+    }
+
+    .coaches-inner { max-width: 1300px; margin: 0 auto; }
+
+    .coaches-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) { .coaches-grid { grid-template-columns: 1fr; } }
+
+    .coach-card {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      transition: border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coach-card:hover { border-color: var(--blue); }
+
+    .coach-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--blue-bright));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .coach-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .coach-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 1rem;
+    }
+
+    .coach-bio {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── LOCATION ── */
+    .location {
+      padding: 7rem 4rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) { .location { grid-template-columns: 1fr; padding: 5rem 1.5rem; } }
+
+    .location-details { }
+
+    .location-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .location-address {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .location-map {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .location-map::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(26,108,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,108,255,0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .location-map-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      text-align: center;
+      position: relative;
+    }
+
+    .location-map-label a {
+      display: block;
+      margin-top: 0.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      text-decoration: none;
+    }
+
+    .location-map-label a:hover { color: var(--white); }
+
+    /* ── REGISTER ── */
+    .register {
+      background: var(--dark);
+      padding: 7rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .register::before {
+      content: 'OFFSZN';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22rem;
+      color: rgba(255,255,255,0.015);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: 0.05em;
+    }
+
+    .register::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100px; right: -100px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--blue), transparent);
+    }
+
+    .register-inner { max-width: 700px; margin: 0 auto; position: relative; }
+
+    .register h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .register h2 span { color: var(--blue); }
+
+    .register p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* Register Form */
+    .register-form {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      text-align: left;
+      margin-top: 3rem;
+    }
+
+    .form-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+      color: var(--blue-bright);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full { grid-column: span 2; }
+    @media (max-width: 600px) { .form-group.full { grid-column: span 1; } }
+
+    .form-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-input, .form-select {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-input:focus, .form-select:focus { border-color: var(--blue); }
+    .form-input::placeholder { color: var(--text-muted); opacity: 0.5; }
+    .form-select { cursor: pointer; appearance: none; }
+    .form-select option { background: var(--dark2); }
+
+    .form-submit {
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+
+    .form-submit:hover { background: var(--blue-bright); }
+
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      padding: 3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer-logo span { color: var(--blue); }
+
+    .footer-note {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .training, .coaches, .pricing, .register { padding: 5rem 1.5rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Success message */
+    .success-msg {
+      display: none;
+      background: rgba(26,108,255,0.1);
+      border: 1px solid var(--blue);
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--blue-bright);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">OFF<span>SZN</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#training">Training</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#coaches">Coaches</a></li>
+    <li><a href="#register" class="nav-cta">Register Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-rink"></div>
+  <div class="hero-eyebrow">Summer 2026 · Wesley Chapel, FL</div>
+  <h1>
+    <span class="stroke">OFF</span><span class="blue">SZN</span><br>
+    HOCKEY
+  </h1>
+  <div class="hero-sub">8-Week Elite Off-Season Training Camp</div>
+  <div class="hero-btns">
+    <a href="#register" class="btn-primary">Register Now</a>
+    <a href="#about" class="btn-secondary">Learn More</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">8</div>
+      <div class="hero-stat-label">Weeks of Training</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">48</div>
+      <div class="hero-stat-label">Total Hours</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">3</div>
+      <div class="hero-stat-label">Expert Coaches</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">$35</div>
+      <div class="hero-stat-label">Per Hour (Full Camp)</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-item">On-Ice Skill Development</div>
+    <div class="marquee-item">Advanced Edge Work</div>
+    <div class="marquee-item">Shooting & Passing</div>
+    <div class="marquee-item">Off-Ice Conditioning</div>
+    <div class="marquee-item">Mental Training</div>
+    <div class="marquee-item">Game IQ Sessions</div>
+    <div class="marquee-item">Video Analysis</div>
+    <div class="marquee-item">Individual Feedback</div>
+    <div class="marquee-item">On-Ice Skill Development</div>
+    <div class="marquee-item">Advanced Edge Work</div>
+    <div class="marquee-item">Shooting & Passing</div>
+    <div class="marquee-item">Off-Ice Conditioning</div>
+    <div class="marquee-item">Mental Training</div>
+    <div class="marquee-item">Game IQ Sessions</div>
+    <div class="marquee-item">Video Analysis</div>
+    <div class="marquee-item">Individual Feedback</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-content">
+    <div class="section-eyebrow">About the Camp</div>
+    <h2 class="section-title">DOMINATE THE<br><span class="blue">OFF-SEASON</span></h2>
+    <p class="section-body">OFFSZN Hockey is an intensive 8-week off-season training program designed for competitive youth, AA, AAA, and high school prep players who are serious about taking their game to the next level.</p>
+    <p class="section-body">Our program builds power, speed, endurance, and skill so athletes return to their teams stronger, faster, and more confident than ever before.</p>
+    <div class="about-features">
+      <div class="about-feature"><div class="feature-check">✓</div> Competitive youth, AA, AAA & high school prep players</div>
+      <div class="about-feature"><div class="feature-check">✓</div> 2 hours per session — 1 hour on-ice + 1 hour off-ice</div>
+      <div class="about-feature"><div class="feature-check">✓</div> Monday, Tuesday & Thursday each training week</div>
+      <div class="about-feature"><div class="feature-check">✓</div> Built-in 4th of July week break — no charge</div>
+      <div class="about-feature"><div class="feature-check">✓</div> Limited spots for individualized coaching attention</div>
+    </div>
+  </div>
+
+  <div class="about-visual">
+    <div class="about-card">
+      <div class="about-card-title">Program Structure</div>
+
+      <div class="phase-block">
+        <div class="phase-num">01</div>
+        <div class="phase-info">
+          <div class="phase-name">Phase 1 — June</div>
+          <div class="phase-desc">4 weeks of high-intensity on-ice and off-ice training. Sessions run Monday, Tuesday & Thursday for 2 hours each.</div>
+        </div>
+      </div>
+
+      <div class="break-block">
+        <div class="break-icon">🎆</div>
+        <div class="break-text">4th of July Break — June 29 – July 5 (Not Charged)</div>
+      </div>
+
+      <div class="phase-block">
+        <div class="phase-num">02</div>
+        <div class="phase-info">
+          <div class="phase-name">Phase 2 — July</div>
+          <div class="phase-desc">4 more weeks picking up right after the holiday. Same intensity and structure, building on Phase 1 gains.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section class="training" id="training">
+  <div class="training-inner">
+    <div class="section-eyebrow">What We Train</div>
+    <h2 class="section-title">ELITE<br><span class="blue">DEVELOPMENT</span></h2>
+    <div class="training-grid">
+      <div class="training-card">
+        <span class="training-icon">🏒</span>
+        <div class="training-num">01</div>
+        <div class="training-name">On-Ice Skill Development</div>
+        <div class="training-desc">High-tempo drills focused on puck control, shooting accuracy, passing precision, and in-game decision making.</div>
+      </div>
+      <div class="training-card">
+        <span class="training-icon">⛸</span>
+        <div class="training-num">02</div>
+        <div class="training-name">Skating & Edge Work</div>
+        <div class="training-desc">Advanced skating technique, edge control, crossovers, transitions, and explosive first-step acceleration.</div>
+      </div>
+      <div class="training-card">
+        <span class="training-icon">💪</span>
+        <div class="training-num">03</div>
+        <div class="training-name">Off-Ice Conditioning</div>
+        <div class="training-desc">Hockey-specific strength, speed, agility, and conditioning programs designed to build elite athletic performance.</div>
+      </div>
+      <div class="training-card">
+        <span class="training-icon">🧠</span>
+        <div class="training-num">04</div>
+        <div class="training-name">Mental Training & Game IQ</div>
+        <div class="training-desc">Mental performance sessions and game IQ development to think faster, compete harder, and lead on the ice.</div>
+      </div>
+      <div class="training-card">
+        <span class="training-icon">🎯</span>
+        <div class="training-num">05</div>
+        <div class="training-name">Individual Feedback</div>
+        <div class="training-desc">Personalized coaching feedback every session so each player understands exactly what to improve and how.</div>
+      </div>
+      <div class="training-card">
+        <span class="training-icon">📹</span>
+        <div class="training-num">06</div>
+        <div class="training-name">Video Analysis</div>
+        <div class="training-desc">Progress tracking and video analysis to identify strengths, weaknesses, and measurable improvement over the 8 weeks.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="section-eyebrow">2026 Schedule</div>
+  <h2 class="section-title">TRAINING<br><span class="blue">DATES</span></h2>
+
+  <div class="schedule-grid">
+    <div class="schedule-panel june">
+      <div class="schedule-month">June Sessions</div>
+      <div class="schedule-subtitle">Phase 1 · 12 Sessions · 24 Hours</div>
+      <div class="date-chips">
+        <div class="date-chip">Jun 1</div>
+        <div class="date-chip">Jun 2</div>
+        <div class="date-chip">Jun 4</div>
+        <div class="date-chip">Jun 8</div>
+        <div class="date-chip">Jun 9</div>
+        <div class="date-chip">Jun 11</div>
+        <div class="date-chip">Jun 15</div>
+        <div class="date-chip">Jun 16</div>
+        <div class="date-chip">Jun 18</div>
+        <div class="date-chip">Jun 22</div>
+        <div class="date-chip">Jun 23</div>
+        <div class="date-chip">Jun 25</div>
+      </div>
+      <div class="weekly-box">
+        <div class="weekly-day"><div class="weekly-day-name">MON</div><div class="weekly-day-hours">1hr On-Ice<br>1hr Off-Ice</div></div>
+        <div class="weekly-day"><div class="weekly-day-name">TUE</div><div class="weekly-day-hours">1hr On-Ice<br>1hr Off-Ice</div></div>
+        <div class="weekly-day"><div class="weekly-day-name">THU</div><div class="weekly-day-hours">1hr On-Ice<br>1hr Off-Ice</div></div>
+      </div>
+    </div>
+
+    <div class="schedule-panel july">
+      <div class="schedule-month">July Sessions</div>
+      <div class="schedule-subtitle">Phase 2 · 12 Sessions · 24 Hours</div>
+      <div class="date-chips">
+        <div class="date-chip">Jul 6</div>
+        <div class="date-chip">Jul 7</div>
+        <div class="date-chip">Jul 9</div>
+        <div class="date-chip">Jul 13</div>
+        <div class="date-chip">Jul 14</div>
+        <div class="date-chip">Jul 16</div>
+        <div class="date-chip">Jul 20</div>
+        <div class="date-chip">Jul 21</div>
+        <div class="date-chip">Jul 23</div>
+        <div class="date-chip">Jul 27</div>
+        <div class="date-chip">Jul 28</div>
+        <div class="date-chip">Jul 30</div>
+      </div>
+      <div class="weekly-box">
+        <div class="weekly-day"><div class="weekly-day-name">MON</div><div class="weekly-day-hours">1hr On-Ice<br>1hr Off-Ice</div></div>
+        <div class="weekly-day"><div class="weekly-day-name">TUE</div><div class="weekly-day-hours">1hr On-Ice<br>1hr Off-Ice</div></div>
+        <div class="weekly-day"><div class="weekly-day-name">THU</div><div class="weekly-day-hours">1hr On-Ice<br>1hr Off-Ice</div></div>
+      </div>
+    </div>
+
+    <div class="schedule-panel break-panel">
+      <div class="schedule-month">🎆 4th of July Break</div>
+      <div class="schedule-subtitle">June 29 – July 5 · Complete Training Break · Not Charged</div>
+      <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.6;">Players get a full week off to rest, recover, and celebrate the holiday with family. This break is built into the program structure and is not included in tuition costs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-inner">
+    <div class="section-eyebrow">Tuition</div>
+    <h2 class="section-title">SIMPLE<br><span class="blue">PRICING</span></h2>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-option">June Only</div>
+        <div class="pricing-amount">$990</div>
+        <div class="pricing-per">Phase 1 · 24 Hours of Training</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="pricing-check">✓</span> 12 sessions throughout June</li>
+          <li><span class="pricing-check">✓</span> 24 total training hours</li>
+          <li><span class="pricing-check">✓</span> On-ice & off-ice sessions</li>
+          <li><span class="pricing-check">✓</span> Professional coaching</li>
+          <li><span class="pricing-check">✓</span> ~$41.25 per hour</li>
+        </ul>
+        <a href="#register" class="pricing-cta">Register for June</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-option">Full Summer Camp</div>
+        <div class="pricing-amount">$1,680</div>
+        <div class="pricing-per">Both Phases · 48 Hours of Training</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="pricing-check">✓</span> All 24 sessions (June + July)</li>
+          <li><span class="pricing-check">✓</span> 48 total training hours</li>
+          <li><span class="pricing-check">✓</span> On-ice & off-ice sessions</li>
+          <li><span class="pricing-check">✓</span> Video analysis & progress tracking</li>
+          <li><span class="pricing-check">✓</span> Only $35.00 per hour</li>
+          <li><span class="pricing-check">✓</span> Save $300 vs registering separately</li>
+        </ul>
+        <a href="#register" class="pricing-cta">Register Full Summer</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-option">July Only</div>
+        <div class="pricing-amount">$990</div>
+        <div class="pricing-per">Phase 2 · 24 Hours of Training</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="pricing-check">✓</span> 12 sessions throughout July</li>
+          <li><span class="pricing-check">✓</span> 24 total training hours</li>
+          <li><span class="pricing-check">✓</span> On-ice & off-ice sessions</li>
+          <li><span class="pricing-check">✓</span> Professional coaching</li>
+          <li><span class="pricing-check">✓</span> ~$41.25 per hour</li>
+        </ul>
+        <a href="#register" class="pricing-cta">Register for July</a>
+      </div>
+    </div>
+
+    <div class="savings-banner">
+      <div class="savings-icon">💰</div>
+      <div class="savings-text">Register for the <span>Full Summer Camp</span> and pay only <span>$35/hour</span> — saving <span>$300</span> compared to registering for both months separately.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="included">
+  <div class="section-eyebrow">What's Included</div>
+  <h2 class="section-title">EVERYTHING<br><span class="blue">YOU NEED</span></h2>
+  <div class="included-grid">
+    <div class="included-item">
+      <div class="included-icon">🏒</div>
+      <div>
+        <div class="included-name">All On-Ice Sessions</div>
+        <div class="included-desc">Full access to all scheduled on-ice training sessions at Nest Hockey Academy.</div>
+      </div>
+    </div>
+    <div class="included-item">
+      <div class="included-icon">💪</div>
+      <div>
+        <div class="included-name">All Off-Ice Sessions</div>
+        <div class="included-desc">Complete off-ice strength, speed, and conditioning program included in tuition.</div>
+      </div>
+    </div>
+    <div class="included-item">
+      <div class="included-icon">🎯</div>
+      <div>
+        <div class="included-name">Personalized Coaching Feedback</div>
+        <div class="included-desc">Individual feedback from experienced coaches every single session.</div>
+      </div>
+    </div>
+    <div class="included-item">
+      <div class="included-icon">📹</div>
+      <div>
+        <div class="included-name">Video Analysis & Progress Tracking</div>
+        <div class="included-desc">Track your development throughout the program with video analysis tools.</div>
+      </div>
+    </div>
+    <div class="included-item">
+      <div class="included-icon">🛡</div>
+      <div>
+        <div class="included-name">All Equipment & Facilities</div>
+        <div class="included-desc">Use of all training equipment and world-class facilities at Nest Hockey Academy.</div>
+      </div>
+    </div>
+    <div class="included-item">
+      <div class="included-icon">🧠</div>
+      <div>
+        <div class="included-name">Mental Training Sessions</div>
+        <div class="included-desc">Game IQ and mental performance sessions to compete at the next level.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COACHES -->
+<section class="coaches" id="coaches">
+  <div class="coaches-inner">
+    <div class="section-eyebrow">Coaching Staff</div>
+    <h2 class="section-title">MEET YOUR<br><span class="blue">COACHES</span></h2>
+    <div class="coaches-grid">
+      <div class="coach-card">
+        <div class="coach-avatar">BB</div>
+        <div class="coach-name">Brent Barber</div>
+        <div class="coach-role">OFFSZN Coach</div>
+        <div class="coach-bio">Bio coming soon. Coach Barber brings years of competitive hockey experience and a passion for developing elite young athletes.</div>
+      </div>
+      <div class="coach-card">
+        <div class="coach-avatar">ZR</div>
+        <div class="coach-name">Zach Remers</div>
+        <div class="coach-role">OFFSZN Coach</div>
+        <div class="coach-bio">Bio coming soon. Coach Remers specializes in skating technique, edge work, and offensive skill development.</div>
+      </div>
+      <div class="coach-card">
+        <div class="coach-avatar">JB</div>
+        <div class="coach-name">Jack Billings</div>
+        <div class="coach-role">OFFSZN Coach</div>
+        <div class="coach-bio">Bio coming soon. Coach Billings leads our off-ice athletic performance program with a focus on hockey-specific conditioning.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location">
+  <div class="location-details">
+    <div class="section-eyebrow">Location</div>
+    <h2 class="section-title">TRAINING<br><span class="blue">FACILITY</span></h2>
+    <div class="location-name">Nest Hockey Academy</div>
+    <div class="location-address">
+      9175 McKendree Rd<br>
+      Wesley Chapel, FL 33545
+    </div>
+    <a href="https://maps.google.com/?q=9175+McKendree+Rd+Wesley+Chapel+FL+33545" target="_blank" class="btn-primary" style="display:inline-block;margin-top:0.5rem;">Get Directions →</a>
+  </div>
+  <div class="location-map">
+    <div class="location-map-label">
+      Nest Hockey Academy<br>Wesley Chapel, FL
+      <a href="https://maps.google.com/?q=9175+McKendree+Rd+Wesley+Chapel+FL+33545" target="_blank">View on Google Maps →</a>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section class="register" id="register">
+  <div class="register-inner">
+    <h2>SECURE YOUR<br><span>SPOT</span> TODAY</h2>
+    <p>Spots are limited to ensure high-quality coaching and individualized attention. Don't miss your chance to transform your game this summer.</p>
+    <a href="#register-form" class="btn-primary">Register Now — Spots Are Limited</a>
+
+    <div class="register-form" id="register-form">
+      <div class="form-title">Registration Interest Form</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Player First Name</label>
+          <input class="form-input" id="reg-firstname" placeholder="First name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Player Last Name</label>
+          <input class="form-input" id="reg-lastname" placeholder="Last name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Parent/Guardian Name</label>
+          <input class="form-input" id="reg-parent" placeholder="Parent or guardian" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" id="reg-email" type="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input class="form-input" id="reg-phone" placeholder="(555) 555-5555" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Player Age</label>
+          <input class="form-input" id="reg-age" placeholder="Age" type="number" min="8" max="18" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current Level</label>
+          <select class="form-select" id="reg-level">
+            <option value="">Select level</option>
+            <option>Youth Competitive</option>
+            <option>AA</option>
+            <option>AAA</option>
+            <option>High School Prep</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Program Interest</label>
+          <select class="form-select" id="reg-program">
+            <option value="">Select program</option>
+            <option>Full Summer Camp ($1,680)</option>
+            <option>June Only ($990)</option>
+            <option>July Only ($990)</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Anything else we should know?</label>
+          <input class="form-input" id="reg-notes" placeholder="Previous experience, injuries, questions..." />
+        </div>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Submit Registration Interest</button>
+      <div class="form-note">Our team will follow up within 24 hours to confirm your spot and provide payment details.</div>
+      <div class="success-msg" id="successMsg">✓ Registration received! We'll be in touch within 24 hours to confirm your spot.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">OFF<span>SZN</span> Hockey</div>
+  <div class="footer-note">Summer 2026 · Nest Hockey Academy · Wesley Chapel, FL</div>
+</footer>
+
+<script>
+  function submitForm() {
+    const required = ['reg-firstname', 'reg-lastname', 'reg-email', 'reg-phone', 'reg-program'];
+    let valid = true;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = '#e02020';
+        valid = false;
+      } else {
+        el.style.borderColor = '';
+      }
+    });
+    if (!valid) { alert('Please fill in all required fields.'); return; }
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.form-submit').disabled = true;
+    document.querySelector('.form-submit').textContent = 'Submitted ✓';
+    document.querySelector('.form-submit').style.background = '#1a6c3a';
+  }
+</script>
+
+</body>
+</html>
