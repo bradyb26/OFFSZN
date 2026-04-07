@@ -13,8 +13,8 @@
       --dark: #0d0e12;
       --dark2: #14161c;
       --ice: #e8f4ff;
-      --blue: #1a6cff;
-      --blue-bright: #4d8fff;
+      --blue: #cc1a1a;
+      --blue-bright: #ff4040;
       --red: #e02020;
       --white: #f0f4ff;
       --text-muted: #8890a4;
@@ -1177,6 +1177,85 @@
       letter-spacing: 0.08em;
       color: var(--blue-bright);
     }
+
+    /* ── MOBILE NAV ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(6,6,8,0.98);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        z-index: 99;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links a {
+        font-size: 1.4rem !important;
+        letter-spacing: 0.2em !important;
+        color: var(--white) !important;
+      }
+
+      .nav-links .nav-cta {
+        background: var(--blue) !important;
+        padding: 0.75rem 2rem !important;
+      }
+
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .hero h1 { font-size: clamp(4rem, 18vw, 7rem); }
+      .hero-stats { flex-wrap: wrap; justify-content: center; }
+      .hero-stat { padding: 1rem 1.5rem; flex: 1; min-width: 120px; }
+
+      .about { padding: 4rem 1.5rem; grid-template-columns: 1fr; gap: 2.5rem; }
+      .training { padding: 4rem 1.5rem; }
+      .training-grid { grid-template-columns: 1fr; }
+      .schedule { padding: 4rem 1.5rem; }
+      .schedule-grid { grid-template-columns: 1fr; }
+      .schedule-panel.break-panel { grid-column: span 1; }
+      .pricing { padding: 4rem 1.5rem; }
+      .pricing-grid { grid-template-columns: 1fr; gap: 1px; }
+      .included { padding: 4rem 1.5rem; }
+      .included-grid { grid-template-columns: 1fr; }
+      .coaches { padding: 4rem 1.5rem; }
+      .coaches-grid { grid-template-columns: 1fr; }
+      .location { padding: 4rem 1.5rem; grid-template-columns: 1fr; gap: 2rem; }
+      .register { padding: 4rem 1.5rem; }
+      .register-form { padding: 1.5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      .weekly-box { grid-template-columns: repeat(3, 1fr); }
+      footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+      .savings-banner { flex-direction: column; text-align: center; }
+    }
   </style>
 </head>
 <body>
@@ -1184,14 +1263,17 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">OFF<span>SZN</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#training">Training</a></li>
-    <li><a href="#schedule">Schedule</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#coaches">Coaches</a></li>
-    <li><a href="#register" class="nav-cta">Register Now</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" onclick="closeNav()">About</a></li>
+    <li><a href="#training" onclick="closeNav()">Training</a></li>
+    <li><a href="#schedule" onclick="closeNav()">Schedule</a></li>
+    <li><a href="#pricing" onclick="closeNav()">Pricing</a></li>
+    <li><a href="#coaches" onclick="closeNav()">Coaches</a></li>
+    <li><a href="#register" class="nav-cta" onclick="closeNav()">Register Now</a></li>
   </ul>
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -1237,7 +1319,6 @@
     <div class="marquee-item">Off-Ice Conditioning</div>
     <div class="marquee-item">Mental Training</div>
     <div class="marquee-item">Game IQ Sessions</div>
-    <div class="marquee-item">Video Analysis</div>
     <div class="marquee-item">Individual Feedback</div>
     <div class="marquee-item">On-Ice Skill Development</div>
     <div class="marquee-item">Advanced Edge Work</div>
@@ -1245,7 +1326,6 @@
     <div class="marquee-item">Off-Ice Conditioning</div>
     <div class="marquee-item">Mental Training</div>
     <div class="marquee-item">Game IQ Sessions</div>
-    <div class="marquee-item">Video Analysis</div>
     <div class="marquee-item">Individual Feedback</div>
   </div>
 </div>
@@ -1330,13 +1410,7 @@
         <div class="training-name">Individual Feedback</div>
         <div class="training-desc">Personalized coaching feedback every session so each player understands exactly what to improve and how.</div>
       </div>
-      <div class="training-card">
-        <span class="training-icon">📹</span>
-        <div class="training-num">06</div>
-        <div class="training-name">Video Analysis</div>
-        <div class="training-desc">Progress tracking and video analysis to identify strengths, weaknesses, and measurable improvement over the 8 weeks.</div>
-      </div>
-    </div>
+</div>
   </div>
 </section>
 
@@ -1433,7 +1507,6 @@
           <li><span class="pricing-check">✓</span> All 24 sessions (June + July)</li>
           <li><span class="pricing-check">✓</span> 48 total training hours</li>
           <li><span class="pricing-check">✓</span> On-ice & off-ice sessions</li>
-          <li><span class="pricing-check">✓</span> Video analysis & progress tracking</li>
           <li><span class="pricing-check">✓</span> Only $35.00 per hour</li>
           <li><span class="pricing-check">✓</span> Save $300 vs registering separately</li>
         </ul>
@@ -1489,12 +1562,7 @@
         <div class="included-desc">Individual feedback from experienced coaches every single session.</div>
       </div>
     </div>
-    <div class="included-item">
-      <div class="included-icon">📹</div>
-      <div>
-        <div class="included-name">Video Analysis & Progress Tracking</div>
-        <div class="included-desc">Track your development throughout the program with video analysis tools.</div>
-      </div>
+
     </div>
     <div class="included-item">
       <div class="included-icon">🛡</div>
@@ -1634,6 +1702,16 @@
 </footer>
 
 <script>
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('navHamburger').classList.toggle('open');
+  }
+
+  function closeNav() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('navHamburger').classList.remove('open');
+  }
+
   function submitForm() {
     const required = ['reg-firstname', 'reg-lastname', 'reg-email', 'reg-phone', 'reg-program'];
     let valid = true;
