@@ -1699,60 +1699,35 @@
     <a href="#register-form" class="btn-primary">Register Now</a>
 
     <div class="register-form" id="register-form">
-      <div class="form-title">Registration Interest Form</div>
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label">Player First Name</label>
-          <input class="form-input" id="reg-firstname" placeholder="First name" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Player Last Name</label>
-          <input class="form-input" id="reg-lastname" placeholder="Last name" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Parent/Guardian Name</label>
-          <input class="form-input" id="reg-parent" placeholder="Parent or guardian" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input class="form-input" id="reg-email" type="email" placeholder="your@email.com" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Phone Number</label>
-          <input class="form-input" id="reg-phone" placeholder="(555) 555-5555" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Player Age</label>
-          <input class="form-input" id="reg-age" placeholder="Age" type="number" min="8" max="18" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Current Level</label>
-          <select class="form-select" id="reg-level">
-            <option value="">Select level</option>
-            <option>Youth Competitive</option>
-            <option>AA</option>
-            <option>AAA</option>
-            <option>High School Prep</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Program Interest</label>
-          <select class="form-select" id="reg-program">
-            <option value="">Select program</option>
-            <option>Full Summer Camp ($1,680)</option>
-            <option>June Only ($990)</option>
-            <option>July Only ($990)</option>
-          </select>
-        </div>
-        <div class="form-group full">
-          <label class="form-label">Anything else we should know?</label>
-          <input class="form-input" id="reg-notes" placeholder="Previous experience, injuries, questions..." />
-        </div>
+      <div class="form-title">Step 1 — Fill Out Registration</div>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.6;">Complete the form below to secure your spot. After submitting, you will see payment instructions.</p>
+      <div style="overflow:hidden;border:1px solid var(--border);">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdiajJFtaWO4RwURWEKsK1pT2kSlYXgEBk7oXLfhqlu-O6fbQ/viewform?embedded=true" width="100%" height="1585" frameborder="0" marginheight="0" marginwidth="0" style="display:block;background:#fff;">Loading…</iframe>
       </div>
-      <button class="form-submit" onclick="submitForm()">Submit Registration Interest</button>
-      <div class="form-note">Our team will follow up within 24 hours to confirm your spot and provide payment details.</div>
-      <div class="success-msg" id="successMsg">✓ Registration received! We'll be in touch within 24 hours to confirm your spot.</div>
+
+      <div style="margin-top:2rem;">
+        <div class="form-title">Step 2 — Complete Payment</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.6;">After submitting your registration above, complete your payment below to officially secure your spot. Select the option that matches your program choice.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+          <div style="background:var(--dark);border:1px solid var(--border);padding:1.5rem;text-align:center;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--blue-bright);margin-bottom:0.25rem;">$990</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;">June Only</div>
+            <a href="#" onclick="alert('Payment link coming soon!'); return false;" style="display:block;padding:0.75rem;background:var(--blue);color:var(--white);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--blue-bright)'" onmouseout="this.style.background='var(--blue)'">Pay Now →</a>
+          </div>
+          <div style="background:var(--dark2);border:1px solid var(--blue);padding:1.5rem;text-align:center;position:relative;">
+            <div style="position:absolute;top:0;left:0;right:0;background:var(--blue);font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;text-align:center;padding:0.3rem;color:var(--white);">Best Value</div>
+            <div style="margin-top:1.25rem;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--blue-bright);margin-bottom:0.25rem;">$1,680</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;">Full Summer</div>
+            <a href="#" onclick="alert('Payment link coming soon!'); return false;" style="display:block;padding:0.75rem;background:var(--blue);color:var(--white);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--blue-bright)'" onmouseout="this.style.background='var(--blue)'">Pay Now →</a>
+          </div>
+          <div style="background:var(--dark);border:1px solid var(--border);padding:1.5rem;text-align:center;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--blue-bright);margin-bottom:0.25rem;">$990</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;">July Only</div>
+            <a href="#" onclick="alert('Payment link coming soon!'); return false;" style="display:block;padding:0.75rem;background:var(--blue);color:var(--white);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--blue-bright)'" onmouseout="this.style.background='var(--blue)'">Pay Now →</a>
+          </div>
+        </div>
+        <div class="form-note" style="margin-top:1rem;">Payment links will be activated shortly. If you have questions contact us directly.</div>
+      </div>
     </div>
   </div>
 </section>
